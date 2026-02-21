@@ -1,0 +1,14 @@
+app :
+  name : SafePlace Platform
+
+pages :
+  - name : Home
+    route: "/"
+    layout : Column
+    component : HomePage
+  - name : About
+    route : /about
+    component : AboutPage
+  - name : Contact
+    route : /contact
+    component : ContactPage
