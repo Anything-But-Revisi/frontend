@@ -1,119 +1,146 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import groupImg from "../../assets/Group 7.png";
+import bgImg from "../../assets/Orang.png";
 
 export function Splash() {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<"enter" | "visible" | "exit">("enter");
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Phase 1: animate in
-    const enterTimer = setTimeout(() => setPhase("visible"), 100);
+    // Fade in logo
+    const enterTimer = setTimeout(() => setPhase("visible"), 300);
 
-    // Phase 2: start exit animation
-    const exitTimer = setTimeout(() => setPhase("exit"), 1800);
+    // Animate circular progress 0→100 over ~2.2s
+    let start: number | null = null;
+    let rafId: number;
+    const duration = 2200;
 
-    // Phase 3: navigate
-    const navTimer = setTimeout(() => navigate("/home"), 2300);
+    function animateProgress(ts: number) {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const pct = Math.min((elapsed / duration) * 100, 100);
+      setProgress(pct);
+      if (pct < 100) {
+        rafId = requestAnimationFrame(animateProgress);
+      }
+    }
+
+    const progressTimer = setTimeout(() => {
+      rafId = requestAnimationFrame(animateProgress);
+    }, 400);
+
+    // Start exit fade
+    const exitTimer = setTimeout(() => setPhase("exit"), 2900);
+
+    // Navigate after fade completes
+    const navTimer = setTimeout(() => navigate("/landing"), 3500);
 
     return () => {
       clearTimeout(enterTimer);
+      clearTimeout(progressTimer);
       clearTimeout(exitTimer);
       clearTimeout(navTimer);
+      cancelAnimationFrame(rafId);
     };
   }, [navigate]);
 
+  const isVisible = phase === "visible";
+  const isExit = phase === "exit";
+  const circumference = 2 * Math.PI * 15;
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden" style={{ background: "linear-gradient(160deg, #1a0a0b 0%, #2d1215 50%, #1a0a0b 100%)" }}>
-      {/* Ambient glow blobs */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(196,76,85,0.25) 0%, transparent 70%)",
-          transition: "opacity 0.8s ease",
-          opacity: phase === "enter" ? 0 : phase === "visible" ? 1 : 0,
-        }}
+    <div
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+      style={{
+        transition: "opacity 0.6s ease",
+        opacity: isExit ? 0 : 1,
+      }}
+    >
+      {/* Background photo */}
+      <img
+        src={bgImg}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
       />
+
+      {/* Dark overlay */}
       <div
-        className="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+        className="absolute inset-0"
         style={{
-          background: "radial-gradient(circle, rgba(217,133,133,0.15) 0%, transparent 70%)",
-          transition: "opacity 1.2s ease",
-          opacity: phase === "enter" ? 0 : phase === "visible" ? 1 : 0,
+          background: "rgba(0,0,0,0.52)",
+          zIndex: 1,
         }}
       />
 
-      {/* Subtle grain overlay */}
+      {/* Warm vignette bottom */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
-          backgroundSize: "128px",
+          background: "radial-gradient(ellipse at 50% 110%, rgba(30,0,0,0.5) 0%, transparent 65%)",
+          zIndex: 2,
         }}
       />
 
-      {/* Main content */}
+      {/* Logo centered */}
       <div
-        className="flex flex-col items-center gap-8 relative z-10"
+        className="flex items-center justify-center relative"
         style={{
-          transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1)",
-          opacity: phase === "enter" ? 0 : phase === "visible" ? 1 : 0,
-          transform: phase === "enter" ? "translateY(20px)" : phase === "visible" ? "translateY(0)" : "translateY(-12px)",
+          zIndex: 10,
+          transition: "opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1)",
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? "translateY(0px) scale(1)" : "translateY(10px) scale(0.92)",
         }}
       >
-        {/* Logo container with glow ring */}
-        <div className="relative flex items-center justify-center">
-          <div
-            className="absolute w-28 h-28 rounded-full"
-            style={{
-              background: "radial-gradient(circle, rgba(196,76,85,0.3) 0%, transparent 70%)",
-              filter: "blur(12px)",
-            }}
-          />
-          <div className="w-20 h-20 rounded-2xl flex items-center justify-center relative" style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.1)" }}>
-            <img src={groupImg} alt="SafeSpace" width={44} height={44} style={{ objectFit: "contain" }} />
-          </div>
-        </div>
-
-        {/* Brand name */}
-        <div className="flex flex-col items-center gap-2">
-          <h1 className="text-3xl font-bold tracking-widest uppercase" style={{ color: "#E8737A", letterSpacing: "0.2em" }}>
-            SafeSpace
-          </h1>
-          {/* Divider line */}
-          <div className="h-px w-16" style={{ background: "linear-gradient(90deg, transparent, rgba(232,115,122,0.6), transparent)" }} />
-          <p className="text-sm text-center tracking-wider" style={{ color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em" }}>
-            Understand · Reflect · Choose
-          </p>
-        </div>
+        <img
+          src={groupImg}
+          alt="SafeSpace Logo"
+          style={{
+            width: "180px",
+            height: "180px",
+            objectFit: "contain",
+          }}
+        />
       </div>
 
-      {/* Loading dots */}
+      {/* Circular loading indicator */}
       <div
-        className="absolute bottom-16 flex gap-2"
+        className="absolute flex items-center justify-center"
         style={{
-          transition: "opacity 0.7s ease 0.4s",
-          opacity: phase === "visible" ? 1 : 0,
+          bottom: "68px",
+          zIndex: 10,
+          transition: "opacity 0.7s ease 0.6s",
+          opacity: isVisible ? 1 : 0,
         }}
       >
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="w-1.5 h-1.5 rounded-full"
-            style={{
-              backgroundColor: "#C44C55",
-              animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite`,
-            }}
+        <svg width="40" height="40" viewBox="0 0 36 36">
+          {/* Track ring */}
+          <circle
+            cx="18"
+            cy="18"
+            r="15"
+            fill="none"
+            stroke="rgba(255,255,255,0.15)"
+            strokeWidth="2"
           />
-        ))}
+          {/* Progress arc */}
+          <circle
+            cx="18"
+            cy="18"
+            r="15"
+            fill="none"
+            stroke="#E8636A"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference * (1 - progress / 100)}
+            transform="rotate(-90 18 18)"
+            style={{ transition: "stroke-dashoffset 0.06s linear" }}
+          />
+        </svg>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); }
-        }
-      `}</style>
     </div>
   );
 }

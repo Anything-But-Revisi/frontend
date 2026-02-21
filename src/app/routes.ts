@@ -21,6 +21,10 @@ export const router = createBrowserRouter([
     Component: Splash,
   },
   {
+    path: "/landing",
+    Component: Landing,
+  },
+  {
     path: "/home",
     Component: Hero,
   },
