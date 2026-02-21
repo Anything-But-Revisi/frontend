@@ -40,11 +40,8 @@ export function TopNav({ showBack, onBack, variant = "dark" }: TopNavProps) {
           )}
 
           {/* Logo + Brand */}
-          <div className="flex items-center gap-2 md:gap-3">
-            <div className={`p-1.5 md:p-2 rounded-full transition-all duration-200 ${isDark ? "bg-white/15 backdrop-blur-sm hover:bg-white/20" : "bg-gradient-to-br from-[#FDF0F0] to-[#FCE5E5] hover:shadow-md"}`}>
-              <ClarityLogo size={20} className="md:w-6 md:h-6" />
-            </div>
-            <span className={`font-bold text-base md:text-lg tracking-tight ${isDark ? "text-white drop-shadow-lg" : "text-[#C44C55]"}`}>SafeSpace</span>
+          <div className="flex items-center">
+            <ClarityLogo size={100} className="h-auto" />
           </div>
         </div>
 
