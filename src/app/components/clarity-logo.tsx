@@ -1,5 +1,11 @@
-export function ClarityLogo({ size = 32 }: { size?: number }) {
-  const logoUrl = new URL("../../assets/logo.jpeg", import.meta.url).href;
+import logoJpeg from "../../assets/logo.png";
 
-  return <img src={logoUrl} alt="Clarity Logo" width={size} height={size} style={{ objectFit: "contain", borderRadius: "50%", overflow: "hidden", display: "block" }} />;
+interface ClarityLogoProps {
+  size?: number;
+  className?: string;
+  rounded?: boolean;
+}
+
+export function ClarityLogo({ size = 32, className = "", rounded = true }: ClarityLogoProps) {
+  return <img src={logoJpeg} alt="SafeSpace Logo" width={size} height={size} className={`object-contain block ${rounded ? "rounded-full" : ""} ${className}`} style={{ width: size, height: size }} />;
 }

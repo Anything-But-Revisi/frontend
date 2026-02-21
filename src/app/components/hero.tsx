@@ -1,65 +1,129 @@
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import { TopNav } from "../components/top-nav";
+
+
 export function Hero() {
+  const navigate = useNavigate();
+
   return (
-    <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-      {/* Gentle background shapes */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-[#E6DFF0] rounded-full opacity-20 blur-3xl"></div>
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#C5D9E8] rounded-full opacity-20 blur-3xl"></div>
-      
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        {/* Abstract supportive illustration */}
-        <div className="mb-8 flex justify-center">
-          <div className="relative">
-            <svg
-              width="120"
-              height="120"
-              viewBox="0 0 120 120"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Gentle overlapping circles representing support and connection */}
-              <circle cx="45" cy="60" r="35" fill="#E6DFF0" opacity="0.6" />
-              <circle cx="75" cy="60" r="35" fill="#C5D9E8" opacity="0.6" />
-              <circle cx="60" cy="45" r="30" fill="#6B8DB8" opacity="0.4" />
-            </svg>
-          </div>
-        </div>
-        
-        <h1 className="text-5xl md:text-6xl mb-6 text-[#4A5568] leading-tight">
-          You Are Not Alone.
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-[#718096] mb-8 leading-relaxed max-w-2xl mx-auto">
-          A safe, private, and confidential space where you can find support, healing, and understanding.
-        </p>
-        
-        <p className="text-lg text-[#718096] mb-10 max-w-xl mx-auto">
-          SafePlace offers AI-powered support designed with care, compassion, and complete anonymity.
-        </p>
-        
-        <button className="px-10 py-4 bg-[#6B8DB8] text-white text-lg rounded-full hover:bg-[#5A7BA3] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-          Start Anonymous Chat
-        </button>
-        
-        <div className="mt-8 flex items-center justify-center gap-2 text-sm text-[#718096]">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background room photo with dark overlay */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 z-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
+
+      <TopNav />
+
+      <section className="relative z-10 flex flex-col justify-end min-h-screen px-6 pb-16 pt-24">
+        {/* Heading */}
+        <div className="mb-5">
+          <h1
+            style={{
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontSize: "clamp(2.5rem, 10vw, 3.8rem)",
+              fontWeight: "700",
+              color: "#E8636A",
+              lineHeight: "1.2",
+              margin: "0",
+            }}
           >
-            <path
-              d="M8 1C4.5 1 2 3.5 2 7C2 8 2.3 8.9 2.8 9.7L2 12L4.3 11.2C5.1 11.7 6 12 7 12H7.1C7 11.7 7 11.3 7 11C7 8.2 9.2 6 12 6C12.3 6 12.7 6 13 6.1C12.4 3.3 10.4 1 8 1Z"
-              fill="#6B8DB8"
-            />
-            <path
-              d="M12 7C10.3 7 9 8.3 9 10C9 10.4 9.1 10.8 9.3 11.1L8.5 13L10.4 12.2C10.8 12.4 11.4 12.5 12 12.5C13.7 12.5 15 11.2 15 9.5C15 7.8 13.7 7 12 7Z"
-              fill="#D5C3E0"
-            />
-          </svg>
-          <span>100% anonymous • No registration required</span>
+            Understand.
+          </h1>
+          <h1
+            style={{
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontSize: "clamp(2.5rem, 10vw, 3.8rem)",
+              fontWeight: "700",
+              color: "#E8636A",
+              lineHeight: "1.2",
+              margin: "0",
+            }}
+          >
+            Reflect.
+          </h1>
+          <h1
+            style={{
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontSize: "clamp(2.5rem, 10vw, 3.8rem)",
+              fontWeight: "700",
+              color: "#E8636A",
+              lineHeight: "1.2",
+              margin: "0",
+            }}
+          >
+            Choose.
+          </h1>
         </div>
-      </div>
-    </section>
+
+        {/* Description text */}
+        <p
+          className="mb-8"
+          style={{
+            color: "rgba(255, 255, 255, 0.85)",
+            fontSize: "14.5px",
+            lineHeight: "1.75",
+            maxWidth: "260px",
+            margin: "0 0 32px 0",
+          }}
+        >
+          Ruang ini membantu Anda memahami situasi dengan tenang.{" "}
+          Luangkan waktu untuk merefleksikannya.{" "}
+          Keputusan tetap sepenuhnya milik Anda.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col gap-3 w-full" style={{ maxWidth: "340px" }}>
+          <button
+            onClick={() => navigate("/assessment/step-1")}
+            style={{
+              backgroundColor: "#C44C55",
+              color: "white",
+              border: "none",
+              borderRadius: "999px",
+              padding: "16px 24px",
+              fontSize: "16px",
+              fontWeight: "500",
+              cursor: "pointer",
+              width: "100%",
+              letterSpacing: "0.01em",
+              transition: "opacity 0.2s",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.opacity = "0.9")}
+            onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Mulai Pelaporan
+          </button>
+
+          <button
+            onClick={() => navigate("/chat")}
+            style={{
+              backgroundColor: "rgba(217, 133, 133, 0.75)",
+              color: "white",
+              border: "none",
+              borderRadius: "999px",
+              padding: "16px 24px",
+              fontSize: "16px",
+              fontWeight: "500",
+              cursor: "pointer",
+              width: "100%",
+              letterSpacing: "0.01em",
+              transition: "opacity 0.2s",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.opacity = "0.9")}
+            onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Bicara dengan SafeSpace AI
+          </button>
+        </div>
+      </section>
+    </div>
   );
 }

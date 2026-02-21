@@ -10,15 +10,15 @@ export function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "I'm here to help you navigate your situation. You can ask me anything.",
+      content: "Saya di sini untuk membantu Anda memahami situasi Anda dan memberikan panduan yang aman dan praktis.",
     },
   ]);
   const [input, setInput] = useState("");
 
   const suggestedPrompts = [
-    "Explain my risk level",
-    "What happens if I report?",
-    "How do I document safely?",
+    "Bagaimana saya menilai tingkat risiko?",
+    "Apa yang terjadi jika saya melaporkan?",
+    "Apa yang harus saya lakukan selanjutnya?",
   ];
 
   const handleSend = () => {
@@ -65,7 +65,7 @@ export function Chat() {
       <div className="pt-16 px-5 max-w-md mx-auto w-full">
         <div className="bg-white p-4 rounded-xl border border-[#E9EEF5] mt-4">
           <p className="text-sm text-[#6B7684]">
-            Current case: Workplace-based harassment
+            Kasus Anda: Anda mengalami pelecehan verbal di tempat kerja oleh atasan Anda selama 3 bulan terakhir. Insiden terbaru terjadi minggu lalu di depan rekan kerja lain.
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ export function Chat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Type your question..."
+            placeholder="Ketik Sesuatu..."
             className="flex-1 px-4 py-3 bg-white border border-[#E9EEF5] rounded-xl focus:outline-none focus:border-[#5C6F8F]/30 text-[#3A4556]"
           />
           <button
@@ -131,7 +131,7 @@ export function Chat() {
                 : "bg-[#E9EEF5] text-[#6B7684]"
             }`}
           >
-            Send
+            Kirim
           </button>
         </div>
       </div>

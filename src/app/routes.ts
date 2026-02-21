@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import { Hero } from "./components/hero";
 import { Splash } from "./pages/splash";
 import { Landing } from "./pages/landing";
 import { AssessmentStep1 } from "./pages/assessment/step-1";
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/home",
-    Component: Landing,
+    Component: Hero,
   },
   {
     path: "/assessment/step-1",
