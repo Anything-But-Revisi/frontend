@@ -59,12 +59,12 @@ export function Chat() {
 
   return (
     <div className="min-h-screen bg-[#F7F9FC] flex flex-col">
-      <TopNav showBack />
+      <TopNav showBack variant="light" />
       
       {/* Context Summary */}
       <div className="pt-16 px-5 max-w-md mx-auto w-full">
-        <div className="bg-white p-4 rounded-xl border border-[#E9EEF5] mt-4">
-          <p className="text-sm text-[#6B7684]">
+        <div className="bg-white p-4 rounded-xl border border-[#E8ECF3] mt-4 shadow-sm">
+          <p className="text-sm text-[#596577] leading-relaxed">
             Kasus Anda: Anda mengalami pelecehan verbal di tempat kerja oleh atasan Anda selama 3 bulan terakhir. Insiden terbaru terjadi minggu lalu di depan rekan kerja lain.
           </p>
         </div>
@@ -82,8 +82,8 @@ export function Chat() {
             <div
               className={`max-w-[80%] p-4 rounded-xl ${
                 message.role === "user"
-                  ? "bg-[#5C6F8F] text-white"
-                  : "bg-white text-[#3A4556] border border-[#E9EEF5]"
+                  ? "bg-[#C44C55] text-white"
+                  : "bg-white text-[#3A4556] border border-[#E8ECF3] shadow-sm"
               }`}
             >
               <p className="text-sm leading-relaxed whitespace-pre-line">
@@ -102,7 +102,7 @@ export function Chat() {
               <button
                 key={index}
                 onClick={() => handlePromptClick(prompt)}
-                className="px-4 py-2 bg-white text-[#5C6F8F] text-sm border border-[#E9EEF5] rounded-full hover:border-[#5C6F8F]/30 transition-colors"
+                className="px-4 py-2 bg-white text-[#8C3F48] text-sm border border-[#E8ECF3] rounded-full hover:bg-[#FFF6F7] hover:border-[#C44C55]/30 transition-colors"
               >
                 {prompt}
               </button>
@@ -120,15 +120,15 @@ export function Chat() {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSend()}
             placeholder="Ketik Sesuatu..."
-            className="flex-1 px-4 py-3 bg-white border border-[#E9EEF5] rounded-xl focus:outline-none focus:border-[#5C6F8F]/30 text-[#3A4556]"
+            className="flex-1 px-4 py-3 bg-white border border-[#E8ECF3] rounded-xl focus:outline-none focus:border-[#C44C55]/35 text-[#3A4556] placeholder:text-[#9AA4B2]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
             className={`px-6 py-3 rounded-xl transition-colors ${
               input.trim()
-                ? "bg-[#6BA8A9] text-white hover:bg-[#5A9091]"
-                : "bg-[#E9EEF5] text-[#6B7684]"
+                ? "bg-[#C44C55] text-white hover:bg-[#B2434C]"
+                : "bg-[#E8ECF3] text-[#8A94A3]"
             }`}
           >
             Kirim

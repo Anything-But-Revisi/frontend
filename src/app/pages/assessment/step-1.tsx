@@ -8,10 +8,10 @@ export function AssessmentStep1() {
   const [selected, setSelected] = useState<string | null>(null);
 
   const options = [
-    { id: "workplace", label: "Workplace" },
-    { id: "campus", label: "Campus" },
+    { id: "workplace", label: "Tempat kerja" },
+    { id: "campus", label: "Kampus" },
     { id: "online", label: "Online" },
-    { id: "public", label: "Public Space" },
+    { id: "public", label: "Ruang publik" },
   ];
 
   const handleContinue = () => {
@@ -23,7 +23,7 @@ export function AssessmentStep1() {
 
   return (
     <div className="min-h-screen bg-[#F7F9FC]">
-      <TopNav showBack />
+      <TopNav showBack variant="light" />
       
       <div className="pt-16">
         <ProgressBar currentStep={1} totalSteps={5} />
@@ -31,10 +31,10 @@ export function AssessmentStep1() {
 
       <main className="pt-8 pb-8 px-5 max-w-md mx-auto">
         <h2 className="text-2xl text-[#3A4556] mb-2 leading-snug">
-          Where did this occur?
+          Di mana kejadian ini terjadi?
         </h2>
         <p className="text-[#6B7684] mb-8 leading-relaxed">
-          Select the environment where the incident happened
+          Pilih lingkungan tempat kejadian berlangsung
         </p>
 
         <div className="space-y-3 mb-8">
@@ -44,8 +44,8 @@ export function AssessmentStep1() {
               onClick={() => setSelected(option.id)}
               className={`w-full py-5 px-6 rounded-xl transition-all text-left ${
                 selected === option.id
-                  ? "bg-[#5C6F8F] text-white shadow-md"
-                  : "bg-white text-[#3A4556] border border-[#E9EEF5] hover:border-[#5C6F8F]/30"
+                  ? "bg-[#C44C55] text-white shadow-md"
+                  : "bg-white text-[#3A4556] border border-[#E8ECF3] hover:border-[#C44C55]/30"
               }`}
             >
               {option.label}
@@ -58,11 +58,11 @@ export function AssessmentStep1() {
           disabled={!selected}
           className={`w-full py-4 px-6 rounded-xl transition-all ${
             selected
-              ? "bg-[#6BA8A9] text-white hover:bg-[#5A9091] shadow-sm"
-              : "bg-[#E9EEF5] text-[#6B7684] cursor-not-allowed"
+              ? "bg-[#C44C55] text-white hover:bg-[#B2434C] shadow-sm"
+              : "bg-[#E8ECF3] text-[#8A94A3] cursor-not-allowed"
           }`}
         >
-          Continue
+          Lanjut
         </button>
       </main>
     </div>
