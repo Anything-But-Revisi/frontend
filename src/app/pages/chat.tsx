@@ -231,7 +231,7 @@ export function Chat() {
       <div className="pt-16 px-5 max-w-md mx-auto w-full">
         <div className="bg-white p-4 rounded-xl border border-[#E8ECF3] mt-4 shadow-sm">
           <p className="text-sm text-[#596577] leading-relaxed">
-            Kasus Anda: Anda mengalami pelecehan verbal di tempat kerja oleh atasan Anda selama 3 bulan terakhir. Insiden terbaru terjadi minggu lalu di depan rekan kerja lain.
+            Contoh Kasus Anda: Anda mengalami pelecehan verbal di tempat kerja oleh atasan Anda selama 3 bulan terakhir. Insiden terbaru terjadi minggu lalu di depan rekan kerja lain.
           </p>
           <p className="text-xs text-[#6B7684] mt-3 break-all">
             {sessionStatusText}

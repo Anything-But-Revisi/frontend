@@ -63,7 +63,7 @@ export function TopNav({ showBack, onBack, variant = "dark" }: TopNavProps) {
 
           {/* Logo + Brand */}
           <div className="flex items-center">
-            <ClarityLogo size={100} className="h-auto" />
+            <ClarityLogo size={100} className="h-auto" onClick={() => handleMenuNavigate("/")} />
           </div>
         </div>
 
