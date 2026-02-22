@@ -55,6 +55,20 @@ const fallbackMessageByStatus = {
 };
 
 export const normalizeApiError = (error) => {
+  if (
+    error &&
+    typeof error === "object" &&
+    typeof error.status === "number" &&
+    typeof error.message === "string"
+  ) {
+    return {
+      status: error.status,
+      message: error.message,
+      details: error.details ?? null,
+      code: error.code ?? "API_ERROR",
+    };
+  }
+
   if (!axios.isAxiosError(error)) {
     return {
       status: 0,

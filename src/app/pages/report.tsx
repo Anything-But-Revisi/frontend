@@ -137,18 +137,18 @@ export function Report() {
           >
             Copy Text
           </button>
-          <button
+          {/* <button
             onClick={handleExport}
             className="w-full py-4 px-6 bg-white text-[#5C6F8F] border border-[#5C6F8F]/20 rounded-xl hover:bg-[#F7F9FC] transition-colors"
           >
             Export PDF
-          </button>
-          <button
+          </button> */}
+          {/* <button
             onClick={handleSave}
             className="w-full py-4 px-6 bg-white text-[#6BA8A9] border border-[#6BA8A9]/20 rounded-xl hover:bg-[#F7F9FC] transition-colors"
           >
             Save Securely
-          </button>
+          </button> */}
         </div>
       </main>
     </div>

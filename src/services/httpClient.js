@@ -1,4 +1,5 @@
 import axios from "axios";
+import { normalizeApiError } from "./apiContract";
 
 const DEFAULT_TIMEOUT = 15000;
 
@@ -34,3 +35,8 @@ export const apiClient = axios.create({
     Accept: "application/json",
   },
 });
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => Promise.reject(normalizeApiError(error)),
+);

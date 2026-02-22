@@ -1,5 +1,6 @@
 import { apiClient } from "./httpClient";
 import { normalizeApiError, normalizeApiSuccess } from "./apiContract";
+import { clearSessionId, getSessionId, setSessionId } from "./storage";
 
 const validateSessionId = (sessionId) => {
   if (!sessionId || typeof sessionId !== "string") {
@@ -10,6 +11,13 @@ const validateSessionId = (sessionId) => {
       code: "INVALID_SESSION_ID",
     };
   }
+
+  return sessionId.trim();
+};
+
+const resolveSessionId = (sessionId) => {
+  const resolvedSessionId = sessionId ?? getSessionId();
+  return validateSessionId(resolvedSessionId);
 };
 
 const validateMessage = (message) => {
@@ -39,7 +47,16 @@ const validateMessage = (message) => {
 export const createSession = async () => {
   try {
     const response = await apiClient.post("/api/v1/sessions");
-    return normalizeApiSuccess("createSession", response.data);
+    const normalizedResponse = normalizeApiSuccess(
+      "createSession",
+      response.data,
+    );
+
+    if (normalizedResponse.session_id) {
+      setSessionId(normalizedResponse.session_id);
+    }
+
+    return normalizedResponse;
   } catch (error) {
     throw normalizeApiError(error);
   }
@@ -47,9 +64,12 @@ export const createSession = async () => {
 
 export const deleteSession = async (sessionId) => {
   try {
-    validateSessionId(sessionId);
-    await apiClient.delete(`/api/v1/sessions/${sessionId}`);
-    return normalizeApiSuccess("deleteSession");
+    const resolvedSessionId = resolveSessionId(sessionId);
+    await apiClient.delete(`/api/v1/sessions/${resolvedSessionId}`);
+    clearSessionId();
+    return normalizeApiSuccess("deleteSession", {
+      session_id: resolvedSessionId,
+    });
   } catch (error) {
     throw normalizeApiError(error);
   }
@@ -57,10 +77,10 @@ export const deleteSession = async (sessionId) => {
 
 export const sendMessage = async ({ sessionId, message }) => {
   try {
-    validateSessionId(sessionId);
+    const resolvedSessionId = resolveSessionId(sessionId);
     const normalizedMessage = validateMessage(message);
     const response = await apiClient.post(
-      `/api/v1/sessions/${sessionId}/chat`,
+      `/api/v1/sessions/${resolvedSessionId}/chat`,
       {
         message: normalizedMessage,
       },
@@ -73,8 +93,10 @@ export const sendMessage = async ({ sessionId, message }) => {
 
 export const getChatHistory = async (sessionId) => {
   try {
-    validateSessionId(sessionId);
-    const response = await apiClient.get(`/api/v1/sessions/${sessionId}/chat`);
+    const resolvedSessionId = resolveSessionId(sessionId);
+    const response = await apiClient.get(
+      `/api/v1/sessions/${resolvedSessionId}/chat`,
+    );
     return normalizeApiSuccess("getChatHistory", response.data);
   } catch (error) {
     throw normalizeApiError(error);

@@ -17,14 +17,14 @@ export function AssessmentStep5() {
   const handleContinue = () => {
     if (selected) {
       sessionStorage.setItem("step5", selected);
-      navigate("/result");
+      navigate("/report");
     }
   };
 
   return (
     <div className="min-h-screen bg-[#F7F9FC]">
       <TopNav showBack />
-      
+
       <div className="pt-16">
         <ProgressBar currentStep={5} totalSteps={5} />
       </div>
