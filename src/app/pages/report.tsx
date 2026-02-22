@@ -194,11 +194,12 @@ export function Report() {
   }, [report]);
 
   const handleCopy = useCallback(() => {
-    if (!reportText) return;
+    if (!reportText) {
+      return;
+    }
 
-    navigator.clipboard.writeText(reportText).then(() => {
-      alert("Laporan berhasil disalin ke clipboard");
-    });
+    navigator.clipboard.writeText(reportText);
+    alert("Laporan berhasil disalin ke clipboard");
   }, [reportText]);
 
   const handleExport = () => {
@@ -208,12 +209,6 @@ export function Report() {
   const handleSave = () => {
     alert("Laporan berhasil disimpan secara aman");
   };
-
-  const isBusy = isLoading || isGenerating;
-
-  const generatedAtLabel = report?.created_at
-    ? `Dibuat: ${formatDate(report.created_at)}`
-    : "Dibuat: Tidak tersedia";
 
   return (
     <div className="min-h-screen bg-[#F7F9FC]">
@@ -229,33 +224,6 @@ export function Report() {
           id="report-content"
           className="bg-white p-6 rounded-xl border border-[#E8ECF3] shadow-sm mb-6 space-y-6"
         >
-          <p className="text-xs text-[#6B7684] break-all">
-            Session: {sessionId || "Belum tersedia"}
-          </p>
-
-          {isBusy ? (
-            <p className="text-sm text-[#6B7684]">
-              {isGenerating
-                ? "Menyusun laporan dari assessment..."
-                : "Memuat laporan..."}
-            </p>
-          ) : null}
-
-          {errorMessage ? (
-            <p className="text-sm text-[#C84545]">{errorMessage}</p>
-          ) : null}
-
-          {report ? (
-            <div>
-              <h3 className="text-sm font-medium text-[#596577] mb-2">
-                Ringkasan Data API
-              </h3>
-              <p className="text-[#3A4556] leading-relaxed whitespace-pre-line">
-                {reportText}
-              </p>
-            </div>
-          ) : null}
-
           {/* Incident Summary */}
           <div>
             <h3 className="text-sm font-medium text-[#596577] mb-2">
@@ -356,33 +324,29 @@ export function Report() {
 
           {/* Report metadata */}
           <div className="pt-4 border-t border-[#E8ECF3]">
-            <p className="text-xs text-[#596577]">{generatedAtLabel}</p>
+            <p className="text-xs text-[#596577]">Dibuat: 21 Februari 2026</p>
           </div>
         </div>
 
         <div className="space-y-3">
           <button
             onClick={handleCopy}
-            disabled={!report || isBusy}
             className="w-full py-4 px-6 bg-[#C44C55] text-white rounded-xl hover:bg-[#B2434C] transition-colors shadow-sm"
           >
             Salin Teks
           </button>
-          {/* 
-          <button
+          {/* <button
             onClick={handleExport}
-            className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
+            className="w-full py-4 px-6 bg-white text-[#5C6F8F] border border-[#5C6F8F]/20 rounded-xl hover:bg-[#F7F9FC] transition-colors"
           >
-            Ekspor PDF
-          </button>
-          <button
+            Export PDF
+          </button> */}
+          {/* <button
             onClick={handleSave}
-            disabled={isBusy}
-            className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
+            className="w-full py-4 px-6 bg-white text-[#6BA8A9] border border-[#6BA8A9]/20 rounded-xl hover:bg-[#F7F9FC] transition-colors"
           >
-            Simpan Aman
-          </button> 
-          */}
+            Save Securely
+          </button> */}
         </div>
       </main>
     </div>
