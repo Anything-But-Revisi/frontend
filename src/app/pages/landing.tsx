@@ -13,8 +13,13 @@ function useFadeIn() {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.12 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -22,8 +27,14 @@ function useFadeIn() {
   return { ref, visible };
 }
 
-function FadeSection({ children, delay = 0, className = "" }: {
-  children: React.ReactNode; delay?: number; className?: string;
+function FadeSection({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
 }) {
   const { ref, visible } = useFadeIn();
   return (
@@ -41,7 +52,8 @@ function FadeSection({ children, delay = 0, className = "" }: {
   );
 }
 
-const FONT_LINK = "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap";
+const FONT_LINK =
+  "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap";
 
 export function Landing() {
   const navigate = useNavigate();
@@ -77,9 +89,18 @@ export function Landing() {
   };
 
   const cards = [
-    { title: "Ceritakan situasi Anda", desc: "Jawab pertanyaan terstruktur sesuai kenyamanan Anda." },
-    { title: "Pahami tingkat risiko Anda", desc: "Dapatkan analisis situasi yang netral dan terstruktur." },
-    { title: "Pilih langkah berikutnya", desc: "Jelajahi opsi dengan panduan yang jelas dan dapat diambil tindakan." },
+    {
+      title: "Ceritakan situasi Anda",
+      desc: "Jawab pertanyaan terstruktur sesuai kenyamanan Anda.",
+    },
+    {
+      title: "Pahami tingkat risiko Anda",
+      desc: "Dapatkan analisis situasi yang netral dan terstruktur.",
+    },
+    {
+      title: "Pilih langkah berikutnya",
+      desc: "Jelajahi opsi dengan panduan yang jelas dan dapat diambil tindakan.",
+    },
   ];
 
   return (
@@ -254,7 +275,9 @@ export function Landing() {
       <nav className={`ss-navbar${scrolled ? " scrolled" : ""}`}>
         <img src={navbarImg} alt="SafeSpace" />
         <button className="ss-hamburger" aria-label="Menu">
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
       </nav>
 
@@ -264,18 +287,27 @@ export function Landing() {
         <div className="ss-hero-overlay" />
         <div className="ss-hero-content">
           <h1 className="ss-hero-heading">
-            Understand.<br />Reflect.<br />Choose.
+            Understand.
+            <br />
+            Reflect.
+            <br />
+            Choose.
           </h1>
           <p className="ss-hero-body">
-            Ruang ini membantu Anda memahami situasi dengan tenang.{" "}
-            Luangkan waktu untuk merefleksikannya.{" "}
-            Keputusan tetap sepenuhnya milik Anda.
+            Ruang ini membantu Anda memahami situasi dengan tenang. Luangkan
+            waktu untuk merefleksikannya. Keputusan tetap sepenuhnya milik Anda.
           </p>
           <div className="ss-hero-buttons">
-            <button className="ss-btn-primary" onClick={() => navigate("/assessment/step-1")}>
+            <button
+              className="ss-btn-primary"
+              onClick={() => navigate("/assessment/step-1")}
+            >
               Mulai Pelaporan
             </button>
-            <button className="ss-btn-secondary" onClick={() => navigate("/chat")}>
+            <button
+              className="ss-btn-secondary"
+              onClick={() => navigate("/chat")}
+            >
               Bicara dengan SafeSpace AI
             </button>
           </div>
@@ -288,14 +320,20 @@ export function Landing() {
           <FadeSection>
             <h2 className="ss-section-title">Cara Kerja SafeSpace</h2>
             <p className="ss-section-subtitle">
-              Data pribadi Anda tidak akan disimpan tanpa izin.<br />
-              Anda bebas menghentikan proses kapan pun.<br />
+              Data pribadi Anda tidak akan disimpan tanpa izin.
+              <br />
+              Anda bebas menghentikan proses kapan pun.
+              <br />
               Informasi Anda dijaga secara rahasia.
             </p>
           </FadeSection>
 
           <FadeSection delay={120} className="ss-carousel-wrap">
-            <div className="ss-carousel-track" ref={carouselRef} onScroll={handleCarouselScroll}>
+            <div
+              className="ss-carousel-track"
+              ref={carouselRef}
+              onScroll={handleCarouselScroll}
+            >
               {cards.map((card, i) => (
                 <div className="ss-carousel-card" key={i}>
                   <img src={orangImg} alt="" className="ss-card-img" />
@@ -324,13 +362,25 @@ export function Landing() {
       <FadeSection>
         <footer className="ss-footer">
           <img src={creditLogoImg} alt="SafeSpace" className="ss-footer-logo" />
-          <a href="https://laporsapa129.kemenpppa.go.id/" target="_blank" rel="noopener noreferrer" className="ss-footer-link">
+          <a
+            href="https://laporsapa129.kemenpppa.go.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ss-footer-link"
+          >
             Layanan SAPA 129
           </a>
-          <a href="https://komnasperempuan.go.id/" target="_blank" rel="noopener noreferrer" className="ss-footer-link">
+          <a
+            href="https://komnasperempuan.go.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ss-footer-link"
+          >
             Komnas Perempuan
           </a>
-          <p className="ss-footer-copy">© 2026, Anything But Revisi. All rights reserved.</p>
+          <p className="ss-footer-copy">
+            © 2026, Anything But Revisi. All rights reserved.
+          </p>
         </footer>
       </FadeSection>
     </>
