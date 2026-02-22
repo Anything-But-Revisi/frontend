@@ -194,13 +194,12 @@ export function Report() {
   }, [report]);
 
   const handleCopy = useCallback(() => {
-    if (!reportText) {
-      return;
-    }
+    if (!reportText) return;
 
-    navigator.clipboard.writeText(reportText);
-    alert("Laporan berhasil disalin ke clipboard");
-  };
+    navigator.clipboard.writeText(reportText).then(() => {
+      alert("Laporan berhasil disalin ke clipboard");
+    });
+  }, [reportText]);
 
   const handleExport = () => {
     alert("Fitur ekspor PDF akan tersedia pada versi berikutnya");
