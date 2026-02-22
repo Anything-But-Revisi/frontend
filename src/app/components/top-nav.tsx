@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { ClarityLogo } from "./clarity-logo";
-import { QuickExit } from "./quick-exit";
 
 interface TopNavProps {
   showBack?: boolean;
@@ -68,16 +67,12 @@ export function TopNav({ showBack, onBack, variant = "dark" }: TopNavProps) {
           </div>
         </div>
 
-        {/* Right: QuickExit + Hamburger */}
+        {/* Right: Hamburger */}
         <div className="flex items-center gap-1 md:gap-2">
-          <div className="hidden md:block">
-            <QuickExit variant={isDark ? "dark" : "light"} />
-          </div>
-
           {/* Hamburger menu icon */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`md:hidden relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 active:scale-95 ${isDark ? "text-white hover:bg-white/15" : "text-[#3A4556] hover:bg-gray-100"}`}
+            className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 active:scale-95 ${isDark ? "text-white hover:bg-white/15" : "text-[#3A4556] hover:bg-gray-100"}`}
             aria-label="Menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-top-nav-menu"
@@ -95,14 +90,14 @@ export function TopNav({ showBack, onBack, variant = "dark" }: TopNavProps) {
         <>
           <button
             type="button"
-            className="md:hidden fixed inset-0 top-[64px] bg-black/20"
+            className="fixed inset-0 top-[64px] bg-black/20"
             aria-label="Tutup menu"
             onClick={() => setMenuOpen(false)}
           />
 
           <div
             id="mobile-top-nav-menu"
-            className={`md:hidden absolute top-full right-4 mt-2 w-[220px] rounded-2xl border p-2 shadow-xl backdrop-blur-sm ${isDark ? "bg-black/80 border-white/20" : "bg-white/95 border-gray-200"}`}
+            className={`absolute top-full right-4 mt-2 w-[220px] rounded-2xl border p-2 shadow-xl backdrop-blur-sm ${isDark ? "bg-black/80 border-white/20" : "bg-white/95 border-gray-200"}`}
           >
             <button
               type="button"
@@ -125,12 +120,6 @@ export function TopNav({ showBack, onBack, variant = "dark" }: TopNavProps) {
             >
               Chat AI
             </button>
-            
-            
-            <div className={`my-2 border-t ${isDark ? "border-white/15" : "border-gray-200"}`} />
-            <div className="px-1 py-1">
-              <QuickExit variant={isDark ? "dark" : "light"} className="w-full text-left" />
-            </div>
           </div>
         </>
       )}

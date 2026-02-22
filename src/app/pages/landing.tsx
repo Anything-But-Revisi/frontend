@@ -136,9 +136,9 @@ export function Landing() {
             <CarouselContent className="-ml-4">
               {cards.map((card, i) => (
                 <CarouselItem key={i} className="pl-4 basis-full">
-                  <div className="h-[280px] md:h-[310px] flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100">
+                  <div className="h-[300px] md:h-[340px] flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100">
                     
-                    <div className="h-[120px] md:h-[145px] w-full overflow-hidden">
+                    <div className="h-[180px] md:h-[215px] w-full overflow-hidden">
                       <img
                         src={orangImg}
                         alt=""
@@ -146,15 +146,15 @@ export function Landing() {
                       />
                     </div>
 
-                    <div className="flex flex-col flex-1 p-4 md:p-5">
+                    <div className="flex flex-col flex-1 p-3 md:p-4">
                       <h3 className="text-base md:text-lg font-semibold mb-2">
                         {card.title}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 flex-1">
                         {card.desc}
                       </p>
 
-                      <div className="mt-4 h-1 w-10 bg-[#C44C55] rounded-full" />
+                      <div className="mt-3 h-1 w-10 bg-[#C44C55] rounded-full" />
                     </div>
                   </div>
                 </CarouselItem>
@@ -180,36 +180,56 @@ export function Landing() {
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="bg-white border-t py-10 px-6">
-        <div className="max-w-3xl mx-auto">
-          <img src={creditLogoImg} alt="SafeSpace" className="h-8 mb-6" />
+            {/* ================= FOOTER ================= */}
+      <footer className="relative overflow-hidden border-t border-[#E8ECF3] bg-gradient-to-b from-white to-[#F3F6FB] py-12 px-6">
+        <div className="pointer-events-none absolute -top-16 -left-10 h-44 w-44 rounded-full bg-[#C44C55]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -right-8 h-44 w-44 rounded-full bg-[#DDAFB4]/20 blur-3xl" />
 
-          <div className="space-y-3 text-sm">
-            <a
-              href="https://laporsapa129.kemenpppa.go.id/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block hover:text-[#C44C55] transition"
-            >
-              Layanan SAPA 129
-            </a>
+        <div className="relative max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+            <div className="max-w-sm">
+              <img src={creditLogoImg} alt="SafeSpace" className="h-8 mb-4" />
+              <p className="text-sm text-[#596577] leading-relaxed">
+                Ruang aman untuk memahami situasi, menilai risiko, dan menentukan langkah berikutnya
+                secara tenang serta terarah.
+              </p>
+            </div>
 
-            <a
-              href="https://komnasperempuan.go.id/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block hover:text-[#C44C55] transition"
-            >
-              Komnas Perempuan
-            </a>
+            <div>
+              <p className="text-sm font-semibold text-[#3A4556] mb-3">Dukungan Resmi</p>
+              <div className="space-y-3 text-sm">
+                <a
+                  href="https://laporsapa129.kemenpppa.go.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-[#E8ECF3] bg-white px-4 py-2 text-[#596577] hover:text-[#C44C55] hover:border-[#C44C55]/30 transition"
+                >
+                  Layanan SAPA 129
+                </a>
+
+                <a
+                  href="https://komnasperempuan.go.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-[#E8ECF3] bg-white px-4 py-2 text-[#596577] hover:text-[#C44C55] hover:border-[#C44C55]/30 transition"
+                >
+                  Komnas Perempuan
+                </a>
+              </div>
+            </div>
           </div>
 
-          <p className="text-xs text-gray-400 mt-6">
-            © 2026, Anything But Revisi. All rights reserved.
-          </p>
+          <div className="mt-8 pt-5 border-t border-[#E8ECF3] flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p className="text-xs text-[#7B8796]">
+              (c) 2026 Anything But Revisi. All rights reserved.
+            </p>
+            <p className="text-xs text-[#9AA4B2]">
+              Privasi Anda tetap menjadi prioritas utama.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
   )
 }
+

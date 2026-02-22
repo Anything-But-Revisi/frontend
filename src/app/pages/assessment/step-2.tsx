@@ -26,11 +26,11 @@ export function AssessmentStep2() {
     <div className="min-h-screen bg-[#F7F9FC]">
       <TopNav showBack variant="light" />
       
-      <div className="pt-16">
+      <div className="pt-20 md:pt-22">
         <ProgressBar currentStep={2} totalSteps={5} />
       </div>
 
-      <main className="pt-8 pb-8 px-5 max-w-md mx-auto">
+      <main className="pt-5 pb-8 px-5 max-w-md mx-auto">
         <h2 className="text-2xl text-[#3A4556] mb-2 leading-snug">
           Siapa yang terlibat?
         </h2>
