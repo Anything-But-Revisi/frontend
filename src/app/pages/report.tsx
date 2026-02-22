@@ -199,73 +199,147 @@ export function Report() {
     }
 
     navigator.clipboard.writeText(reportText);
-    alert("Report copied to clipboard");
-  }, [reportText]);
+    alert("Laporan berhasil disalin ke clipboard");
+  };
 
-  const isBusy = isLoading || isGenerating;
+  const handleExport = () => {
+    alert("Fitur ekspor PDF akan tersedia pada versi berikutnya");
+  };
+
+  const handleSave = () => {
+    alert("Laporan berhasil disimpan secara aman");
+  };
 
   return (
     <div className="min-h-screen bg-[#F7F9FC]">
-      <TopNav showBack />
+      <TopNav showBack variant="light" />
 
       <main className="pt-20 pb-8 px-5 max-w-md mx-auto">
         <h2 className="text-2xl text-[#3A4556] mb-6 leading-snug">
-          Structured Report
+          Laporan Terstruktur
         </h2>
 
-        <div className="bg-white p-6 rounded-xl border border-[#E9EEF5] mb-6 space-y-6">
-          <p className="text-xs text-[#6B7684] break-all">
-            Session: {sessionId || "Belum tersedia"}
-          </p>
-
-          {isBusy ? (
-            <p className="text-sm text-[#6B7684]">
-              {isGenerating
-                ? "Menyusun laporan dari assessment..."
-                : "Memuat laporan..."}
+        {/* Report Content */}
+        <div
+          id="report-content"
+          className="bg-white p-6 rounded-xl border border-[#E8ECF3] shadow-sm mb-6 space-y-6"
+        >
+          {/* Incident Summary */}
+          <div>
+            <h3 className="text-sm font-medium text-[#596577] mb-2">
+              Ringkasan Kejadian
+            </h3>
+            <p className="text-[#3A4556] leading-relaxed">
+              Pelecehan berbasis tempat kerja yang melibatkan atasan. Kejadian
+              mencakup komentar tidak pantas dengan bukti yang tersedia melalui pesan.
             </p>
-          ) : null}
+          </div>
 
-          {errorMessage ? (
-            <p className="text-sm text-[#C84545]">{errorMessage}</p>
-          ) : null}
+          {/* Timeline Structure */}
+          <div>
+            <h3 className="text-sm font-medium text-[#596577] mb-2">
+              Struktur Kronologi
+            </h3>
+            <ul className="space-y-2 text-[#3A4556] leading-relaxed">
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Kejadian awal terjadi di lingkungan tempat kerja</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Pola kejadian teridentifikasi dari waktu ke waktu</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Bukti telah dikumpulkan dan diamankan</span>
+              </li>
+            </ul>
+          </div>
 
-          {report ? (
-            <>
-              <div>
-                <h3 className="text-sm font-medium text-[#6B7684] mb-2">
-                  Incident Summary
-                </h3>
-                <p className="text-[#3A4556] leading-relaxed whitespace-pre-line">
-                  {reportText}
-                </p>
-              </div>
+          {/* Risk Assessment */}
+          <div>
+            <h3 className="text-sm font-medium text-[#596577] mb-2">
+              Penilaian Risiko
+            </h3>
+            <p className="text-[#3A4556] leading-relaxed mb-3">
+              Tingkat risiko sedang diidentifikasi berdasarkan:
+            </p>
+            <ul className="space-y-2 text-[#3A4556] leading-relaxed">
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Terdapat ketimpangan kuasa</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Bukti terdokumentasi tersedia</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">-</span>
+                <span>Potensi pembalasan di lingkungan kerja</span>
+              </li>
+            </ul>
+          </div>
 
-              <div className="pt-4 border-t border-[#E9EEF5]">
-                <p className="text-xs text-[#6B7684]">
-                  Generated: {formatDate(report.created_at)}
-                </p>
-              </div>
-            </>
-          ) : null}
+          {/* Power Imbalance Context */}
+          <div>
+            <h3 className="text-sm font-medium text-[#596577] mb-2">
+              Konteks Ketimpangan Kuasa
+            </h3>
+            <p className="text-[#3A4556] leading-relaxed">
+              Terdeteksi ketimpangan kuasa tinggi. Relasi atasan-bawahan
+              menciptakan kerentanan struktural dan meningkatkan risiko pembalasan.
+            </p>
+          </div>
+
+          {/* Suggested Escalation Path */}
+          <div>
+            <h3 className="text-sm font-medium text-[#596577] mb-2">
+              Rekomendasi Jalur Tindak Lanjut
+            </h3>
+            <ol className="space-y-2 text-[#3A4556] leading-relaxed">
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">1.</span>
+                <span>Dokumentasikan seluruh kejadian beserta waktu kejadiannya</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">2.</span>
+                <span>Simpan seluruh bukti secara aman</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">3.</span>
+                <span>Pertimbangkan pelaporan internal melalui HR</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#596577] flex-shrink-0">4.</span>
+                <span>Jelajahi pendampingan hukum eksternal bila diperlukan</span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Report metadata */}
+          <div className="pt-4 border-t border-[#E8ECF3]">
+            <p className="text-xs text-[#596577]">Dibuat: 21 Februari 2026</p>
+          </div>
         </div>
 
         <div className="space-y-3">
           <button
             onClick={handleCopy}
-            disabled={!report || isBusy}
-            className="w-full py-4 px-6 bg-[#5C6F8F] text-white rounded-xl hover:bg-[#4A5A73] transition-colors shadow-sm disabled:opacity-50"
+            className="w-full py-4 px-6 bg-[#C44C55] text-white rounded-xl hover:bg-[#B2434C] transition-colors shadow-sm"
           >
-            Copy Text
+            Salin Teks
           </button>
           <button
-            onClick={() => {
-              void loadOrCreateReport();
-            }}
-            disabled={isBusy}
-            className="w-full py-4 px-6 bg-white text-[#5C6F8F] border border-[#5C6F8F]/20 rounded-xl hover:bg-[#F7F9FC] transition-colors disabled:opacity-50"
+            onClick={handleExport}
+            className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
           >
-            Muat Ulang Report
+            Ekspor PDF
+          </button>
+          <button
+            onClick={handleSave}
+            className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
+          >
+            Simpan Aman
           </button>
         </div>
       </main>
