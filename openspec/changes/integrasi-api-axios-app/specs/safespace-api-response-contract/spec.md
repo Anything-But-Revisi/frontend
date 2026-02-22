@@ -6,8 +6,8 @@ The system SHALL expose a consistent success contract from the frontend API laye
 
 #### Scenario: Normalize successful endpoint response
 
-- **WHEN** an API request succeeds for session or chat endpoints
-- **THEN** the API layer returns normalized payload data mapped to the documented schemas (`SessionResponse`, `MessageResponse`, `ChatHistoryResponse`) without exposing transport metadata as required page input
+- **WHEN** an API request succeeds for session, chat, or report endpoints
+- **THEN** the API layer returns normalized payload data mapped to documented schemas (`SessionResponse`, `MessageResponse`, `ChatHistoryResponse`, `ReportResponse`) without exposing transport metadata as required page input
 
 ### Requirement: Unified error response contract
 
@@ -20,7 +20,7 @@ The system SHALL normalize HTTP and network failures into a predictable error ob
 
 #### Scenario: Service unavailable error is normalized
 
-- **WHEN** backend returns HTTP 503 for session operations
+- **WHEN** backend returns HTTP 503 for session or report operations
 - **THEN** the API layer returns an error object with `status: 503` and an actionable `message` indicating temporary unavailability
 
 #### Scenario: Network failure is normalized

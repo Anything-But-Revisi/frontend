@@ -2,6 +2,7 @@ import axios from "axios";
 import { normalizeApiError } from "./apiContract";
 
 const DEFAULT_TIMEOUT = 15000;
+const DEFAULT_LOCAL_API_BASE_URL = "http://localhost:8000";
 
 const sanitizeBaseUrl = (value) => value.replace(/\/+$/, "");
 
@@ -9,7 +10,7 @@ export const getApiBaseUrl = () => {
   const rawValue = import.meta.env.VITE_API_BASE_URL?.trim();
 
   if (!rawValue) {
-    return "";
+    return DEFAULT_LOCAL_API_BASE_URL;
   }
 
   if (rawValue.startsWith("/")) {
@@ -21,9 +22,9 @@ export const getApiBaseUrl = () => {
     return sanitizeBaseUrl(parsed.toString());
   } catch {
     console.warn(
-      "Invalid VITE_API_BASE_URL. Falling back to same-origin relative paths.",
+      "Invalid VITE_API_BASE_URL. Falling back to localhost API URL.",
     );
-    return "";
+    return DEFAULT_LOCAL_API_BASE_URL;
   }
 };
 

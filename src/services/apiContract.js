@@ -33,6 +33,24 @@ export const normalizeChatHistoryResponse = (payload) => {
   };
 };
 
+export const normalizeReportResponse = (payload) => {
+  const safePayload = toObject(payload);
+  return {
+    id: safePayload.id ?? "",
+    session_id: safePayload.session_id ?? "",
+    location: safePayload.location ?? "",
+    perpetrator: safePayload.perpetrator ?? "",
+    description: safePayload.description ?? "",
+    evidence: safePayload.evidence ?? "",
+    user_goal: safePayload.user_goal ?? "",
+    generated_document:
+      typeof safePayload.generated_document === "string"
+        ? safePayload.generated_document
+        : null,
+    created_at: safePayload.created_at ?? "",
+  };
+};
+
 export const normalizeApiSuccess = (kind, payload) => {
   switch (kind) {
     case "createSession":
@@ -41,6 +59,9 @@ export const normalizeApiSuccess = (kind, payload) => {
       return normalizeMessageResponse(payload);
     case "getChatHistory":
       return normalizeChatHistoryResponse(payload);
+    case "createReport":
+    case "getReport":
+      return normalizeReportResponse(payload);
     case "deleteSession":
       return { success: true };
     default:
@@ -51,6 +72,7 @@ export const normalizeApiSuccess = (kind, payload) => {
 const fallbackMessageByStatus = {
   404: "Resource tidak ditemukan.",
   422: "Permintaan tidak valid. Periksa kembali input Anda.",
+  500: "Terjadi gangguan pada server. Silakan coba lagi.",
   503: "Layanan backend sedang tidak tersedia. Coba lagi beberapa saat.",
 };
 

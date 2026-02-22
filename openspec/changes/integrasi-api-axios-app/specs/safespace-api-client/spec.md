@@ -27,3 +27,19 @@ The system SHALL provide API methods to send messages and read chat history for 
 
 - **WHEN** the page requests history for a valid `session_id`
 - **THEN** the API client sends `GET /api/v1/sessions/{session_id}/chat` and returns `ChatHistoryResponse` with `session_id` and `messages`
+
+## ADDED Requirements
+
+### Requirement: Frontend API client for report operations
+
+The system SHALL provide API methods to create and retrieve complaint reports for an existing session using `/api/v1/sessions/{session_id}/report`, with request payload and response mapping aligned to `ReportCreate` and `ReportResponse` schemas.
+
+#### Scenario: Create report for active session
+
+- **WHEN** the page submits a complete report form for a valid `session_id`
+- **THEN** the API client sends `POST /api/v1/sessions/{session_id}/report` with `ReportCreate` fields and returns `ReportResponse`
+
+#### Scenario: Retrieve existing report for active session
+
+- **WHEN** the page requests report detail for a valid `session_id`
+- **THEN** the API client sends `GET /api/v1/sessions/{session_id}/report` and returns `ReportResponse`
