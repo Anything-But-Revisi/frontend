@@ -209,6 +209,12 @@ export function Report() {
     alert("Laporan berhasil disimpan secara aman");
   };
 
+  const isBusy = isLoading || isGenerating;
+
+  const generatedAtLabel = report?.created_at
+    ? `Dibuat: ${formatDate(report.created_at)}`
+    : "Dibuat: Tidak tersedia";
+
   return (
     <div className="min-h-screen bg-[#F7F9FC]">
       <TopNav showBack variant="light" />
@@ -223,6 +229,33 @@ export function Report() {
           id="report-content"
           className="bg-white p-6 rounded-xl border border-[#E8ECF3] shadow-sm mb-6 space-y-6"
         >
+          <p className="text-xs text-[#6B7684] break-all">
+            Session: {sessionId || "Belum tersedia"}
+          </p>
+
+          {isBusy ? (
+            <p className="text-sm text-[#6B7684]">
+              {isGenerating
+                ? "Menyusun laporan dari assessment..."
+                : "Memuat laporan..."}
+            </p>
+          ) : null}
+
+          {errorMessage ? (
+            <p className="text-sm text-[#C84545]">{errorMessage}</p>
+          ) : null}
+
+          {report ? (
+            <div>
+              <h3 className="text-sm font-medium text-[#596577] mb-2">
+                Ringkasan Data API
+              </h3>
+              <p className="text-[#3A4556] leading-relaxed whitespace-pre-line">
+                {reportText}
+              </p>
+            </div>
+          ) : null}
+
           {/* Incident Summary */}
           <div>
             <h3 className="text-sm font-medium text-[#596577] mb-2">
@@ -230,7 +263,8 @@ export function Report() {
             </h3>
             <p className="text-[#3A4556] leading-relaxed">
               Pelecehan berbasis tempat kerja yang melibatkan atasan. Kejadian
-              mencakup komentar tidak pantas dengan bukti yang tersedia melalui pesan.
+              mencakup komentar tidak pantas dengan bukti yang tersedia melalui
+              pesan.
             </p>
           </div>
 
@@ -286,7 +320,8 @@ export function Report() {
             </h3>
             <p className="text-[#3A4556] leading-relaxed">
               Terdeteksi ketimpangan kuasa tinggi. Relasi atasan-bawahan
-              menciptakan kerentanan struktural dan meningkatkan risiko pembalasan.
+              menciptakan kerentanan struktural dan meningkatkan risiko
+              pembalasan.
             </p>
           </div>
 
@@ -298,7 +333,9 @@ export function Report() {
             <ol className="space-y-2 text-[#3A4556] leading-relaxed">
               <li className="flex gap-3">
                 <span className="text-[#596577] flex-shrink-0">1.</span>
-                <span>Dokumentasikan seluruh kejadian beserta waktu kejadiannya</span>
+                <span>
+                  Dokumentasikan seluruh kejadian beserta waktu kejadiannya
+                </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#596577] flex-shrink-0">2.</span>
@@ -310,24 +347,28 @@ export function Report() {
               </li>
               <li className="flex gap-3">
                 <span className="text-[#596577] flex-shrink-0">4.</span>
-                <span>Jelajahi pendampingan hukum eksternal bila diperlukan</span>
+                <span>
+                  Jelajahi pendampingan hukum eksternal bila diperlukan
+                </span>
               </li>
             </ol>
           </div>
 
           {/* Report metadata */}
           <div className="pt-4 border-t border-[#E8ECF3]">
-            <p className="text-xs text-[#596577]">Dibuat: 21 Februari 2026</p>
+            <p className="text-xs text-[#596577]">{generatedAtLabel}</p>
           </div>
         </div>
 
         <div className="space-y-3">
           <button
             onClick={handleCopy}
+            disabled={!report || isBusy}
             className="w-full py-4 px-6 bg-[#C44C55] text-white rounded-xl hover:bg-[#B2434C] transition-colors shadow-sm"
           >
             Salin Teks
           </button>
+          {/* 
           <button
             onClick={handleExport}
             className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
@@ -336,10 +377,12 @@ export function Report() {
           </button>
           <button
             onClick={handleSave}
+            disabled={isBusy}
             className="w-full py-4 px-6 bg-white text-[#8C3F48] border border-[#C44C55]/25 rounded-xl hover:bg-[#FFF6F7] transition-colors"
           >
             Simpan Aman
-          </button>
+          </button> 
+          */}
         </div>
       </main>
     </div>

@@ -2,7 +2,8 @@ import axios from "axios";
 import { normalizeApiError } from "./apiContract";
 
 const DEFAULT_TIMEOUT = 15000;
-const DEFAULT_LOCAL_API_BASE_URL = "http://localhost:8000";
+// const DEFAULT_REMOTE_API_BASE_URL =  "http://anything-but-revisi.hackathon.sev-2.com";
+const DEFAULT_REMOTE_API_BASE_URL =  "http://localhost:8000/";
 
 const sanitizeBaseUrl = (value) => value.replace(/\/+$/, "");
 
@@ -10,7 +11,7 @@ export const getApiBaseUrl = () => {
   const rawValue = import.meta.env.VITE_API_BASE_URL?.trim();
 
   if (!rawValue) {
-    return DEFAULT_LOCAL_API_BASE_URL;
+    return DEFAULT_REMOTE_API_BASE_URL;
   }
 
   if (rawValue.startsWith("/")) {
@@ -22,9 +23,9 @@ export const getApiBaseUrl = () => {
     return sanitizeBaseUrl(parsed.toString());
   } catch {
     console.warn(
-      "Invalid VITE_API_BASE_URL. Falling back to localhost API URL.",
+      "Invalid VITE_API_BASE_URL. Falling back to default remote API URL.",
     );
-    return DEFAULT_LOCAL_API_BASE_URL;
+    return DEFAULT_REMOTE_API_BASE_URL;
   }
 };
 
